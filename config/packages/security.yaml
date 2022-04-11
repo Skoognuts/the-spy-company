@@ -39,6 +39,7 @@ security:
         ROLE_ADMIN: ROLE_READER
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/api, roles: ROLE_ADMIN }
 
 when@test:
     security:
