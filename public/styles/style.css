@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
 html,
 body {
   margin: 0;
@@ -36,7 +34,7 @@ footer {
   align-items: center;
   padding-top: 8px;
   padding-inline: 30px;
-  background: rgba(66, 66, 66, 0.5);
+  background: rgba(66, 66, 66, 0.4);
 }
 
 .header-transition,
@@ -46,11 +44,11 @@ footer {
 }
 
 .header-transition {
-  background: linear-gradient(rgba(66, 66, 66, 0.5), rgba(255, 255, 255, 0));
+  background: linear-gradient(rgba(66, 66, 66, 0.4), rgba(255, 255, 255, 0));
 }
 
 .footer-transition {
-  background: linear-gradient(rgba(255, 255, 255, 0), rgba(66, 66, 66, 0.5));
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(66, 66, 66, 0.4));
 }
 
 .logo_wrapper {
@@ -60,20 +58,24 @@ footer {
 }
 
 .logo {
-  width: 60px;
-  filter: drop-shadow(0 0 5px rgba(66, 66, 66, 0.5));
+  height: 100px;
+  filter: drop-shadow(0 0 5px rgb(66, 66, 66));
   margin-right: 20px;
 }
 
-.brand-name {
-  font-family: 'Anton', sans-serif;
-  text-shadow: 0 0 10px rgba(66, 66, 66, 0.8);
-  letter-spacing: 5px;
+.login_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-block: 7px;
+  padding-inline: 30px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
-.brand-name > a {
-  color:rgb(44, 44, 44);
-  text-decoration: none;
+.login_wrapper > p {
+  margin: 0;
 }
 
 main {
