@@ -20,7 +20,7 @@ class Specialty
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    #[ORM\ManyToMany(targetEntity: Agent::class, inversedBy: 'specialties')]
+    #[ORM\ManyToMany(targetEntity: Agent::class, mappedBy: 'specialties')]
     private $agents;
 
     #[ORM\OneToMany(mappedBy: 'requiredSpecialty', targetEntity: Mission::class)]

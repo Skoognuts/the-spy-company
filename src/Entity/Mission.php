@@ -57,10 +57,6 @@ class Mission
     #[ORM\JoinColumn(nullable: false)]
     private $requiredSpecialty;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'missions')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
-
     public function __construct()
     {
         $this->agents = new ArrayCollection();
@@ -274,18 +270,6 @@ class Mission
     public function setRequiredSpecialty(?Specialty $requiredSpecialty): self
     {
         $this->requiredSpecialty = $requiredSpecialty;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

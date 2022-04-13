@@ -32,7 +32,7 @@ class Agent
     #[ORM\Column(type: 'string', length: 255)]
     private $nationality;
 
-    #[ORM\ManyToMany(targetEntity: Specialty::class, mappedBy: 'agents')]
+    #[ORM\ManyToMany(targetEntity: Specialty::class, inversedBy: 'agents')]
     private $specialties;
 
     #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'agents')]

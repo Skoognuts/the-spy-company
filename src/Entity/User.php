@@ -37,9 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Mission::class)]
-    private $missions;
-
     public function __construct()
     {
         $this->missions = new ArrayCollection();
@@ -149,35 +146,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * @return Collection<int, Mission>
-     */
-    public function getMissions(): Collection
-    {
-        return $this->missions;
-    }
-
-    public function addMission(Mission $mission): self
-    {
-        if (!$this->missions->contains($mission)) {
-            $this->missions[] = $mission;
-            $mission->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMission(Mission $mission): self
-    {
-        if ($this->missions->removeElement($mission)) {
-            // set the owning side to null (unless already changed)
-            if ($mission->getUser() === $this) {
-                $mission->setUser(null);
-            }
-        }
-
-        return $this;
     }
 }
