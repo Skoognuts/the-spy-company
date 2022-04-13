@@ -7,7 +7,47 @@
     {{ include('parts/_header.html.twig') }}
 
     <main>
-
+        <div class="titles-wrapper">
+            <h1>Accueil | The SPY Company</h1>
+            <p class="table-title">Ci-dessous, la liste des missions de l'agence. Pour plus d'informations, selectionnez la ligne du tableau correspondante.</p>
+        </div>
+        <div class="table-wrapper">
+            <table class="mission-table">
+                <thead height="40px">
+                    <tr>
+                        <th width="60%">Intitulé</th>
+                        <th class="mission-type" width="20%">Type</th>
+                        <th class="mission-status" width="20%">Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mission in missions %}
+                    <tr>
+                        <td><a href="{{ path('missionId', {'id': mission.id}) }}">📂 {{ mission.codeName }} - {{ mission.title }}</a></td>
+                        <td class="mission-type"><a href="{{ path('missionId', {'id': mission.id}) }}">{{ mission.type }}</a></td>
+                        <td><a href="{{ path('missionId', {'id': mission.id}) }}"><p class="{{ mission.status | lower | replace({'é':'e'}) | replace({' ':'-'}) }}">{{ mission.status }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-menu">
+            <p class="inactive-link">Page précédente</p>
+            <p>&emsp;|&emsp;</p>
+            {% for i in range(1, pageCount) %}
+                {% if i == 1 %}
+                    <p class="inactive-link">{{ i }}</p>
+                {% else %}
+                    <a href="{{ path('missions', {'page': i}) }}">{{ i }}</a>
+                {% endif %}
+                <p>&emsp;|&emsp;</p>
+            {% endfor %}
+            {% if missionsLength > 10 %}
+                <a href="{{ path('missions', {'page': 2}) }}">Page suivante</a>
+            {% else %}
+                <p class="inactive-link">Page suivante</p>
+            {% endif %}
+        </div>
     </main>
 
     {{ include('parts/_footer.html.twig') }}

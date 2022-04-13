@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MISSION | The Spy Company{% endblock %}
+
+{% block body %}
+<div class="homepage-wrapper">
+    {{ include('parts/_header.html.twig') }}
+
+    <main>
+        <div class="titles-wrapper">
+            <h1>Mission :</h1>
+            <h2>&emsp;📂 {{ mission.title }}</h2>
+        </div>
+        <div class="table-wrapper">
+            <table class="mission-item">
+                <thead height="40px">
+                    <tr>
+                        <th width="20%">Nom de code</th>
+                        <th width="0%">Intitulé</th>
+                        <th class="mission-type" width="20%">Type</th>
+                        <th class="mission-status" width="20%">Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ mission.codeName }}</td>
+                        <td>{{ mission.title }}</td>
+                        <td class="mission-type">{{ mission.type }}</td>
+                        <td><p class="{{ mission.status | lower | replace({'é':'e'}) | replace({' ':'-'}) }}">{{ mission.status }}</p></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="mission-item">
+                <thead height="20px">
+                    <tr>
+                        <th width="80%">Description</th>
+                        <th class="mission-type" width="20%">Pays</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ mission.description }}</td>
+                        <td class="mission-type">{{ mission.country }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="mission-item">
+                <thead height="20px">
+                    <tr>
+                        <th width="20%">Date de début</th>
+                        <th width="20%">Date de fin</th>
+                        <th class="mission-type" width="60%">Compétence requise pour la mission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ mission.startDate | date('d-m-Y') }}</td>
+                        <td>{{ mission.endDate | date('d-m-Y') }}</td>
+                        <td class="mission-type">{{ mission.requiredSpecialty.title }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="mission-item">
+                <thead height="20px">
+                    <tr>
+                        <th colspan="5">Agents impliqués :</th>
+                    </tr>
+                    <tr>
+                        <th width="20%">Nom</th>
+                        <th width="20%">Prénom</th>
+                        <th class="mission-type" width="20%">Code d'identification</th>
+                        <th class="mission-type" width="20%">Date de naissance</th>
+                        <th class="mission-type" width="20%">Nationalité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for agent in mission.agents %}
+                    <tr>
+                        <td>{{ agent.lastName }}</td>
+                        <td>{{ agent.firstName }}</td>
+                        <td class="mission-type">{{ agent.identificationCode }}</td>
+                        <td class="mission-type">{{ agent.dateOfBirth | date('d-m-Y') }}</td>
+                        <td class="mission-type">{{ agent.nationality }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">> Spécialités de l'agent :</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <ul>
+                                {% for specialty in agent.specialties %}
+                                    <li>{{ specialty.title }} 
+                                        {% if specialty.title == mission.requiredSpecialty.title %}
+                                            ✅
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="mission-item">
+                <thead height="20px">
+                    <tr>
+                        <th colspan="4">Planques :</th>
+                    </tr>
+                    <tr>
+                        <th width="20%">Type</th>
+                        <th width="50%">Adresse</th>
+                        <th class="mission-type" width="20%">Pays</th>
+                        <th class="mission-type" width="10%">Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hideout in mission.hideouts %}
+                    <tr>
+                        <td>{{ hideout.type }}</td>
+                        <td>{{ hideout.address }}</td>
+                        <td class="mission-type">{{ hideout.country }}</td>
+                        <td class="mission-type">{{ hideout.code }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="mission-item">
+                <thead height="20px">
+                    <tr>
+                        <th colspan="4">Contacts :</th>
+                    </tr>
+                    <tr>
+                        <th width="20%">Nom</th>
+                        <th width="20%">Prénom</th>
+                        <th class="mission-type" width="20%">Nom de code</th>
+                        <th class="mission-type" width="20%">Date de naissance</th>
+                        <th class="mission-type" width="20%">Nationalité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in mission.contacts %}
+                    <tr>
+                        <td>{{ contact.lastName }}</td>
+                        <td>{{ contact.firstName }}</td>
+                        <td class="mission-type">{{ contact.codeName }}</td>
+                        <td class="mission-type">{{ contact.dateOfBirth | date('d-m-Y') }}</td>
+                        <td class="mission-type">{{ contact.nationality }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="mission-item">
+                <thead height="20px">
+                    <tr>
+                        <th colspan="4">Cibles :</th>
+                    </tr>
+                    <tr>
+                        <th width="20%">Nom</th>
+                        <th width="20%">Prénom</th>
+                        <th class="mission-type" width="20%">Nom de code</th>
+                        <th class="mission-type" width="20%">Date de naissance</th>
+                        <th class="mission-type" width="20%">Nationalité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for target in mission.targets %}
+                    <tr>
+                        <td>{{ target.lastName }}</td>
+                        <td>{{ target.firstName }}</td>
+                        <td class="mission-type">{{ target.codeName }}</td>
+                        <td class="mission-type">{{ target.dateOfBirth | date('d-m-Y') }}</td>
+                        <td class="mission-type">{{ target.nationality }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-menu">
+            <p><a href="{{ app.request.headers.get('referer') }}">Retour</a></p>
+        </div>
+    </main>
+
+    {{ include('parts/_footer.html.twig') }}
+</div>
+{% endblock %}
