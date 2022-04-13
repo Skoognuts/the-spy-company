@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 html,
 body {
   margin: 0;
   width: 100vw;
-  max-height: 100vh;
+  min-height: 100vh;
   background-image: url("../images/background.jpg");
   background-size: cover;
   background-attachment: fixed;
@@ -15,13 +17,8 @@ footer {
   width: 100%;
 }
 
-header {
-  position: absolute;
-  top: 0;
-}
-
 footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
 }
 
@@ -30,11 +27,18 @@ footer {
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-between;
   align-items: center;
-  padding-top: 8px;
+  padding-block: 8px;
   padding-inline: 30px;
   background: rgba(66, 66, 66, 0.4);
+}
+
+.header-content {
+  justify-content: space-between;
+}
+
+.footer-content {
+  justify-content: center;
 }
 
 .header-transition,
@@ -51,16 +55,9 @@ footer {
   background: linear-gradient(rgba(255, 255, 255, 0), rgba(66, 66, 66, 0.4));
 }
 
-.logo_wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-}
-
 .logo {
   height: 100px;
   filter: drop-shadow(0 0 5px rgb(66, 66, 66));
-  margin-right: 20px;
 }
 
 .login_wrapper {
@@ -82,4 +79,111 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 80vh;
+  align-items: center;
+}
+
+h1,
+h2 {
+  font-family: 'Righteous', cursive;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+.titles-wrapper,
+.table-wrapper,
+.pagination-menu {
+  width: 80%;
+  margin-top: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.titles-wrapper {
+  padding-inline: 30px;
+  padding-block: 15px;
+}
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.mission-table,
+.mission-item {
+  width: 80%;
+  align-self: center;
+  margin-block: 20px;
+}
+
+.mission-item {
+  margin-bottom: 0;
+}
+
+.mission-table tbody tr td a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: rgb(66, 66, 66);
+  text-decoration: none;
+}
+
+.mission-table tbody tr:hover {
+  background: #f9ffff;
+}
+
+.en-preparation,
+.en-cours,
+.termine,
+.echec,
+.mission-type,
+.mission-status {
+  text-align: center;
+  margin-block: 2px;
+}
+
+.en-preparation,
+.en-cours,
+.termine,
+.echec {
+  border: 1px solid rgb(66, 66, 66);
+  border-radius: 5px;
+}
+
+.en-preparation {
+  background: lightblue;
+}
+
+.en-cours {
+  background: lightyellow;
+}
+
+.termine {
+  background: lightgreen;
+}
+
+.echec {
+  background: lightcoral;
+}
+
+.pagination-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.pagination-menu > p {
+  margin: 0;
 }
