@@ -45,32 +45,24 @@ class MissionRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Mission[] Returns an array of Mission objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getMissions()
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $queryBuilder = $this->createQueryBuilder('m')
+            ->orderBy('m.id')
         ;
-    }
-    */
+        $query = $queryBuilder->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Mission
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getResult();
     }
-    */
+
+    public function getMissionById(int $id)
+    {
+        $queryBuilder = $this->createQueryBuilder('m')
+            ->where('m.id = :id')
+            ->setParameter('id', $id)
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
 }
