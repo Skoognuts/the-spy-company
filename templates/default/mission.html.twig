@@ -9,12 +9,35 @@
     <main>
         <div class="titles-wrapper">
             <h1>Mission :</h1>
-            <h2>&emsp;📂 {{ mission.title }}</h2>
+            <div class="d-flex">
+                <h2>&emsp;📂 {{ mission.title }}</h2>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <p class="m-0">&emsp;|&emsp;</p>
+                    <a href="{{ path('app_mission_edit', {'id': mission.id}) }}">Modifier</a>
+                    <p class="m-0">&emsp;|&emsp;</p>
+                    {{ include('mission/_delete_form.html.twig') }}
+                {% endif %}
+            </div>
         </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="pagination-menu mt-2 mb-0">
+                <a href="{{ path('app_agent_index') }}">Agents</a>
+                <p class="m-0">&emsp;|&emsp;</p>
+                <a href="{{ path('app_target_index') }}">Cibles</a>
+                <p class="m-0">&emsp;|&emsp;</p>
+                <a href="{{ path('app_contact_index') }}">Contacts</a>
+                <p class="m-0">&emsp;|&emsp;</p>
+                <a href="{{ path('app_mission_index') }}">Missions</a>
+                <p class="m-0">&emsp;|&emsp;</p>
+                <a href="{{ path('app_hideout_index') }}">Planques</a>
+                <p class="m-0">&emsp;|&emsp;</p>
+                <a href="{{ path('app_specialty_index') }}">Spécialités</a>
+            </div>
+        {% endif %}
         <div class="table-wrapper">
             <table class="mission-item">
                 <thead height="40px">
-                    <tr>
+                    <tr class="row-lightyellow">
                         <th width="20%">Nom de code</th>
                         <th width="0%">Intitulé</th>
                         <th class="mission-type" width="20%">Type</th>
@@ -62,8 +85,8 @@
             </table>
             <table class="mission-item">
                 <thead height="20px">
-                    <tr>
-                        <th colspan="5">Agents impliqués :</th>
+                    <tr class="row-lightyellow">
+                        <th colspan="5">&emsp;🧍 - Agents impliqués :</th>
                     </tr>
                     <tr>
                         <th width="20%">Nom</th>
@@ -104,8 +127,8 @@
             </table>
             <table class="mission-item">
                 <thead height="20px">
-                    <tr>
-                        <th colspan="4">Planques :</th>
+                    <tr class="row-lightyellow">
+                        <th colspan="4">&emsp;🏠 - Planques :</th>
                     </tr>
                     <tr>
                         <th width="20%">Type</th>
@@ -115,20 +138,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for hideout in mission.hideouts %}
-                    <tr>
-                        <td>{{ hideout.type }}</td>
-                        <td>{{ hideout.address }}</td>
-                        <td class="mission-type">{{ hideout.country }}</td>
-                        <td class="mission-type">{{ hideout.code }}</td>
-                    </tr>
-                    {% endfor %}
+                    {% if mission.hideouts is not empty %}
+                        {% for hideout in mission.hideouts %}
+                        <tr>
+                            <td>{{ hideout.type }}</td>
+                            <td>{{ hideout.address }}</td>
+                            <td class="mission-type">{{ hideout.country }}</td>
+                            <td class="mission-type">{{ hideout.code }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td class="text-center" colspan="4">Aucune planque assignée à cette mission.</td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
             <table class="mission-item">
                 <thead height="20px">
-                    <tr>
-                        <th colspan="4">Contacts :</th>
+                    <tr class="row-lightyellow">
+                        <th colspan="5">&emsp;🕿 - Contacts :</th>
                     </tr>
                     <tr>
                         <th width="20%">Nom</th>
@@ -152,8 +181,8 @@
             </table>
             <table class="mission-item">
                 <thead height="20px">
-                    <tr>
-                        <th colspan="4">Cibles :</th>
+                    <tr class="row-lightyellow">
+                        <th colspan="5">&emsp;🎯 - Cibles :</th>
                     </tr>
                     <tr>
                         <th width="20%">Nom</th>

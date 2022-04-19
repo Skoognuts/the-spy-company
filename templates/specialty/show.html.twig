@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SPECIALITE | The Spy Company{% endblock %}
+
+{% block body %}
+    {{ include('parts/_header.html.twig') }}
+    
+    <main>
+        <div class="titles-wrapper">
+            <h1>Spécialité :</h1>
+            <div class="d-flex align-items-start">
+                <h2 class="m-0">&emsp;📂 {{ specialty.id }} - {{ specialty.title }}</h2>
+                <p class="m-0">&emsp;|&emsp;</p>
+                <a href="{{ path('app_specialty_edit', {'id': specialty.id}) }}">Modifier</a>
+                <p class="m-0">&emsp;|&emsp;</p>
+                {{ include('specialty/_delete_form.html.twig') }}
+            </div>
+        </div>
+        <div class="pagination-menu mt-2 mb-0">
+            <a href="{{ path('app_agent_index') }}">Agents</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_target_index') }}">Cibles</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_contact_index') }}">Contacts</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_mission_index') }}">Missions</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_hideout_index') }}">Planques</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_specialty_index') }}">Spécialités</a>
+        </div>
+        <div class="table-wrapper">
+            <table class="table mission-table">
+                <thead height="40px">
+                    <tr class="row-lightyellow">
+                        <th colspan="2">Informations :</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td class="text-center">{{ specialty.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Intitulé</th>
+                        <td class="text-center">{{ specialty.title }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table mission-table">
+                <thead height="40px">
+                    <tr class="row-lightyellow">
+                        <th colspan="3">Agents spécialisés :</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if specialty.agents is not empty %}
+                        {% for agent in specialty.agents %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ agent.lastName }} {{ agent.firstName }} a.k.a {{ agent.identificationCode }}</td>
+                            <td class="text-center"><a class="active-link" href="{{ path('app_agent_show', {'id': agent.id}) }}">Voir l'agent</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td class="text-center" colspan="3">Aucune agent trouvée pour cette spécialité.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <table class="table mission-table">
+                <thead height="40px">
+                    <tr class="row-lightyellow">
+                        <th colspan="3">Mission nécessitant cette spécialité :</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if specialty.missions is not empty %}
+                        {% for mission in specialty.missions %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ mission.codeName }} - {{ mission.title }}</td>
+                            <td class="text-center"><a class="active-link" href="{{ path('missionId', {'id': mission.id}) }}">Voir la mission</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td class="text-center" colspan="3">Aucune mission ne requiert cette spécialité.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-menu">
+            <a href="{{ app.request.headers.get('referer') }}">Retour</a>
+        </div>
+    </main>
+
+    {{ include('parts/_footer.html.twig') }}
+{% endblock %}

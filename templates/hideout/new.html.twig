@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PLANQUE | The Spy Company{% endblock %}
+
+{% block body %}
+    {{ include('parts/_header.html.twig') }}
+
+    <main>
+        <div class="titles-wrapper">
+            <h1>Créer une planque :</h1>
+        </div>
+        <div class="table-wrapper">
+            <div class="edition-wrapper">
+                {{ include('hideout/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+            </div>
+        </div>
+        <div class="pagination-menu">
+            <a href="{{ path('app_hideout_index') }}">Retour</a>
+        </div>
+    </main>
+
+    {{ include('parts/_footer.html.twig') }}
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CONTACT | The Spy Company{% endblock %}
+
+{% block body %}
+    {{ include('parts/_header.html.twig') }}
+    
+    <main>
+        <div class="titles-wrapper">
+            <h1>Contact :</h1>
+            <div class="d-flex align-items-start">
+                <h2 class="m-0">&emsp;📂 {{ contact.firstName }} {{ contact.lastName }}</h2>
+                <p class="m-0">&emsp;|&emsp;</p>
+                <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
+                <p class="m-0">&emsp;|&emsp;</p>
+                {{ include('contact/_delete_form.html.twig') }}
+            </div>
+        </div>
+        <div class="pagination-menu mt-2 mb-0">
+            <a href="{{ path('app_agent_index') }}">Agents</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_target_index') }}">Cibles</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_contact_index') }}">Contacts</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_mission_index') }}">Missions</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_hideout_index') }}">Planques</a>
+            <p class="m-0">&emsp;|&emsp;</p>
+            <a href="{{ path('app_specialty_index') }}">Spécialités</a>
+        </div>
+        <div class="table-wrapper">
+            <table class="table mission-table">
+                <thead height="40px">
+                    <tr class="row-lightyellow">
+                        <th colspan="2">Informations personnelles :</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ contact.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ contact.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>{{ contact.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de naissance</th>
+                        <td>{{ contact.dateOfBirth | date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom de code</th>
+                        <td>{{ contact.codeName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nationalité</th>
+                        <td>{{ contact.nationality }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table mission-table">
+                <thead height="40px">
+                    <tr class="row-lightyellow">
+                        <th colspan="3">Missions associées :</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if contact.missions is not empty %}
+                        {% for mission in contact.missions %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ mission.codeName }} - {{ mission.title }}</td>
+                                <td class="text-center"><a class="active-link" href="{{ path('missionId', {'id': mission.id}) }}">Voir la mission</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td class="text-center" colspan="3">Aucune mission trouvée pour ce contact.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <table class="table mission-table">
+                <thead height="40px">
+                    <tr class="row-lightyellow">
+                        <th colspan="3">Relations :</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if contact.missions is not empty %}
+                        {% for mission in contact.missions %}
+                            {% for relation in mission.contacts %}
+                                {% if mission.contacts | length != 1 %}
+                                    {% if relation.id != contact.id %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ relation.lastName }} {{ relation.firstName }} a.k.a {{ relation.codeName }}</td>
+                                            <td class="text-center"><a class="active-link" href="{{ path('app_contact_show', {'id': relation.id}) }}">Voir la relation</a></td>
+                                        </tr>
+                                    {% endif %}
+                                {% else %}
+                                    <tr>
+                                        <td class="text-center" colspan="3">Aucune relation trouvée pour ce contact.</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td class="text-center" colspan="3">Aucune relation trouvée pour ce contact.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-menu">
+            <a href="{{ app.request.headers.get('referer') }}">Retour</a>
+        </div>
+    </main>
+
+    {{ include('parts/_footer.html.twig') }}
+{% endblock %}

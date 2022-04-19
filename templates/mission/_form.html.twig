@@ -1,0 +1,134 @@
+<div class="edition-form">
+{{ form_start(form) }}
+    <table class="table">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Informations sur la mission :</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        {{ form_label(form.title, 'Titre') }}
+        <div class="form-element">
+            {{ form_widget(form.title) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.type, 'Type') }}
+        <div class="form-element">
+            {{ form_widget(form.type) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.status, 'Statut') }}
+        <div class="form-element">
+            {{ form_widget(form.status) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.description, 'Description') }}
+        <div class="form-element">
+            {{ form_widget(form.description) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.requiredSpecialty, 'Spécialité requise') }}
+        <div class="form-element">
+            {{ form_widget(form.requiredSpecialty) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.country, 'Pays') }}
+        <div class="form-element">
+            {{ form_widget(form.country) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.startDate, 'Date de début') }}
+        <div class="form-element">
+            {{ form_widget(form.startDate) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.endDate, 'Date de fin') }}
+        <div class="form-element">
+            {{ form_widget(form.endDate) }}
+        </div>
+    </div>
+    <table class="table mt-2">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Sélection des agents :</th>
+            </tr>
+        </thead>
+        <thead height="20px">
+            <tr class="row-light">
+                <td>Veuillez sélectionner au moins un agent. Au moins un agent doit posséder la spécialité requise pour la mission.</td>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        {{ form_label(form.agents, 'Agent(s)') }}
+        <div class="form-element">
+            {{ form_widget(form.agents) }}
+        </div>
+    </div>
+    <table class="table mt-2">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Sélection des contacts :</th>
+            </tr>
+        </thead>
+        <thead height="20px">
+            <tr class="row-light">
+                <td>Veuillez sélectionner au moins un contact. Les contacts doivent être de la même nationalité que le pays de déroulement de la mission.</td>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        {{ form_label(form.contacts, 'Contact(s)') }}
+        <div class="form-element">
+            {{ form_widget(form.contacts) }}
+        </div>
+    </div>
+    <table class="table mt-2">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Sélection des cibles :</th>
+            </tr>
+        </thead>
+        <thead height="20px">
+            <tr class="row-light">
+                <td>Veuillez sélectionner au moins une cible. Les cibles ne doivent être de la même nationalité que les agents sélectionnés.</td>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        {{ form_label(form.targets, 'Cible(s)') }}
+        <div class="form-element">
+            {{ form_widget(form.targets) }}
+        </div>
+    </div>
+    <table class="table mt-2">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Sélection des planques :</th>
+            </tr>
+        </thead>
+        <thead height="20px">
+            <tr class="row-light">
+                <td>Facultatif. Les planques sélectionnées doivent être situées dans le pays de déroulement de la mission.</td>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        {{ form_label(form.hideouts, 'Planque(s)') }}
+        <div class="form-element">
+            {{ form_widget(form.hideouts) }}
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <button class="btn btn-primary form-btn">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}
+</div>

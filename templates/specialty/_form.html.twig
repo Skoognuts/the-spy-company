@@ -1,0 +1,20 @@
+<div class="edition-form">
+{{ form_start(form) }}
+    <table class="table">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Informations :</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        {{ form_label(form.title, 'Intitulé') }}
+        <div class="form-element">
+            {{ form_widget(form.title) }}
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <button class="btn btn-primary form-btn">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}
+</div>

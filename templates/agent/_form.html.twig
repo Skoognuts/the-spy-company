@@ -1,0 +1,42 @@
+<div class="edition-form">
+{{ form_start(form) }}
+    <table class="table">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Informations personnelles :</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        <div class="form-element">
+            {{ form_label(form.lastName, 'Nom') }}
+            {{ form_widget(form.lastName) }}
+        </div>
+        <div class="form-element">
+            {{ form_label(form.firstName, 'Prénom') }}
+            {{ form_widget(form.firstName) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.dateOfBirth, 'Date de naissance') }}
+        <div class="form-element">
+            {{ form_widget(form.dateOfBirth) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.nationality, 'Nationalité') }}
+        <div class="form-element">
+            {{ form_widget(form.nationality) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.specialties, 'Spécialités') }}
+        <div class="form-element">
+            {{ form_widget(form.specialties) }}
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <button class="btn btn-primary form-btn">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}
+</div>

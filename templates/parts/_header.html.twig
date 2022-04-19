@@ -5,9 +5,9 @@
     </div>
     <div class="login_wrapper">
       {% if app.user %}
-        <p>{{ app.user.lastName }} {{ app.user.firstName }} connecté 🟢 <a href="{{ path('logout') }}">Se déconnecter</a></p>
+        <p>{{ app.user.lastName }} {{ app.user.firstName }} connecté 🟢&emsp;<a href="{{ path('admin') }}">Administration</a>&emsp;|&emsp;<a href="{{ path('logout') }}">Se déconnecter</a></p>
       {% elseif not app.user %}
-        <p>Vous n'êtes pas authentifié 🔴 <a href="{{ path('login') }}">Se connecter</a></p>
+        <p>Vous n'êtes pas authentifié 🔴&emsp;<a href="{{ path('login') }}">Se connecter</a></p>
       {% endif %}
     </div>
   </div>

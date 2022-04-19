@@ -1,0 +1,38 @@
+<div class="edition-form">
+{{ form_start(form) }}
+    <table class="table">
+        <thead height="40px">
+            <tr class="row-lightyellow">
+                <th>Informations :</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="inline-form">
+        {{ form_label(form.type, 'Type') }}
+        <div class="form-element">
+            {{ form_widget(form.type) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.address, 'Adresse') }}
+        <div class="form-element">
+            {{ form_widget(form.address) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.country, 'Pays') }}
+        <div class="form-element">
+            {{ form_widget(form.country) }}
+        </div>
+    </div>
+    <div class="inline-form">
+        {{ form_label(form.code, 'Code') }}
+        <div class="form-element">
+            {{ form_widget(form.code) }}
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <button class="btn btn-primary form-btn">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}
+</div>

@@ -7,7 +7,59 @@
     {{ include('parts/_header.html.twig') }}
 
     <main>
-
+        <div class="titles-wrapper">
+            <h1>Administration | The SPY Company</h1>
+            <p class="table-title">Cette page reservée à l'administration de "The SPY Company" permet la gestion des la base de données de l'agence.</p>
+        </div>
+        <div class="table-wrapper">
+            <table class="table mission-table">
+                <thead height="80px">
+                    <tr class="row-lightyellow">
+                        <th colspan="3">&emsp;📂 - Tables de la base de données :</th>
+                    </tr>
+                    <tr>
+                        <th width="50%">Nom de la table</th>
+                        <th class="text-center" width="25%">Nombre d'entrées</th>
+                        <th class="text-center" width="25%">Classement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="{{ path('app_agent_index') }}">Agents</a></td>
+                        <td class="text-center"><a href="{{ path('app_agent_index') }}">{{ agentsLength }}</a></td>
+                        <td class="text-center"><a class="secret" href="{{ path('app_agent_index') }}">*** Secret défense ***</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ path('app_target_index') }}">Cibles</a></td>
+                        <td class="text-center"><a href="{{ path('app_target_index') }}">{{ targetsLength }}</a></td>
+                        <td class="text-center"><a class="secret" href="{{ path('app_target_index') }}">*** Secret défense ***</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ path('app_contact_index') }}">Contacts</a></td>
+                        <td class="text-center"><a href="{{ path('app_contact_index') }}">{{ contactsLength }}</a></td>
+                        <td class="text-center"><a class="secret" href="{{ path('app_contact_index') }}">*** Secret défense ***</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ path('app_mission_index') }}">Missions</a></td>
+                        <td class="text-center"><a href="{{ path('app_mission_index') }}">{{ missionsLength }}</a></td>
+                        <td class="text-center"><a class="secret" href="{{ path('app_mission_index') }}">*** Secret défense ***</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ path('app_hideout_index') }}">Planques</a></td>
+                        <td class="text-center"><a href="{{ path('app_hideout_index') }}">{{ hideoutsLength }}</a></td>
+                        <td class="text-center"><a class="secret" href="{{ path('app_hideout_index') }}">*** Secret défense ***</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ path('app_specialty_index') }}">Spécialités</a></td>
+                        <td class="text-center"><a href="{{ path('app_specialty_index') }}">{{ specialtiesLength }}</a></td>
+                        <td class="text-center"><a class="secret" href="{{ path('app_specialty_index') }}">*** Secret défense ***</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-menu">
+            <a href="{{ path('homepage') }}">Accueil</a>
+        </div>
     </main>
 
     {{ include('parts/_footer.html.twig') }}
