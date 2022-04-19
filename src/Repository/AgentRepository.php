@@ -45,32 +45,50 @@ class AgentRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Agent[] Returns an array of Agent objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getAgents()
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->orderBy('a.id')
         ;
-    }
-    */
+        $query = $queryBuilder->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Agent
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getResult();
     }
-    */
+
+    /* Fonctions de Filtrage */
+    public function getAgentsByIdCode(int $idCode)
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->where('a.identificationCode = :idCode')
+            ->setParameter('idCode', $idCode)
+            ->orderBy('a.identificationCode')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getAgentsByNationality(string $nationality)
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->where('a.nationality = :nationality')
+            ->setParameter('nationality', $nationality)
+            ->orderBy('a.id')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getAgentsBySpecialty(int $specialtyId)
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->where(':specialtyId MEMBER OF a.specialties')
+            ->setParameter('specialtyId', $specialtyId)
+            ->orderBy('a.id')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

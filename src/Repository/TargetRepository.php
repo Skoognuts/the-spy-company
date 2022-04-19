@@ -44,33 +44,14 @@ class TargetRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
-    // /**
-    //  * @return Target[] Returns an array of Target objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function getTargets()
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->orderBy('t.id')
         ;
-    }
-    */
+        $query = $queryBuilder->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Target
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getResult();
     }
-    */
 }

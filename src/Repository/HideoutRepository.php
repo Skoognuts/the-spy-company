@@ -45,32 +45,13 @@ class HideoutRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Hideout[] Returns an array of Hideout objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getHideouts()
     {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $queryBuilder = $this->createQueryBuilder('h')
+            ->orderBy('h.id')
         ;
-    }
-    */
+        $query = $queryBuilder->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Hideout
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getResult();
     }
-    */
 }

@@ -18,7 +18,11 @@ class DefaultController extends AbstractController
             $missions = array_slice($missions, 0, 10);
         }
         $pageCount = substr($missionsLength, 0, -1);
-        $pageCount = (int)$pageCount + 1;
+        if (substr($missionsLength, -1) == 0) {
+            $pageCount = (int)$pageCount;
+        } else {
+            $pageCount = (int)$pageCount + 1;
+        }
         return $this->render('default/index.html.twig', [
             'missions' => $missions,
             'missionsLength' => $missionsLength,
@@ -32,7 +36,11 @@ class DefaultController extends AbstractController
         $missions = $missionRepository->getMissions();
         $missionsLength = count($missions);
         $pageCount = substr($missionsLength, 0, -1);
-        $pageCount = (int)$pageCount + 1;
+        if (substr($missionsLength, -1) == 0) {
+            $pageCount = (int)$pageCount;
+        } else {
+            $pageCount = (int)$pageCount + 1;
+        }
         if ($page == 1 || $missionsLength <= 10) {
             return $this->redirectToRoute('homepage');
         }
