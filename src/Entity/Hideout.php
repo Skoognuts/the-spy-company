@@ -116,4 +116,10 @@ class Hideout
 
         return $this;
     }
+
+    public function __toString()
+    {
+        $hideoutString = strval($this->id).' - '.$this->country;
+        return $hideoutString;
+    }
 }

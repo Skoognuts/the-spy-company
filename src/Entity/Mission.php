@@ -273,4 +273,10 @@ class Mission
 
         return $this;
     }
+
+    public function __toString()
+    {
+        $missionString = strval($this->id).' - '.$this->title;
+        return $missionString;
+    }
 }

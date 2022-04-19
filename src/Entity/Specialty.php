@@ -105,4 +105,10 @@ class Specialty
 
         return $this;
     }
+
+    public function __toString()
+    {
+        $specialtyString = strval($this->id).' - '.$this->title;
+        return $specialtyString;
+    }
 }

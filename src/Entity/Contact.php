@@ -131,4 +131,10 @@ class Contact
 
         return $this;
     }
+
+    public function __toString()
+    {
+        $contactString = strval($this->id).' - '.$this->lastName.' '.$this->firstName;
+        return $contactString;
+    }
 }

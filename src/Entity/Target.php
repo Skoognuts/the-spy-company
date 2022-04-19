@@ -131,4 +131,10 @@ class Target
 
         return $this;
     }
+
+    public function __toString()
+    {
+        $targetString = strval($this->id).' - '.$this->lastName.' '.$this->firstName;
+        return $targetString;
+    }
 }
