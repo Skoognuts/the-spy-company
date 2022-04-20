@@ -46,7 +46,7 @@
         </tbody>
       </table>
     </div>
-    <div class="pagination-menu">
+    <div class="pagination-menu mb-2">
       <a href="{{ path('missions', {'page': (page - 1)}) }}">Page précédente</a>
       <p>&emsp;|&emsp;</p>
       {% for i in range(1, pageCount) %}
@@ -62,6 +62,12 @@
       {% else %}
         <a href="{{ path('missions', {'page': (page + 1)}) }}">Page suivante</a>
       {% endif %}
+    </div>
+    <div class="disclaimer text-center">
+        <h2>⚠ Disclaimer ⚠</h2>
+        <p>Ce site représentant une institution d'espionnage a été réalisé dans l'optique d'une évaluation d'entrainement à la conception d'applications web.</br>
+        Tous le contenu (les agents, les cibles, les contacts, les missions et les planques) est purement fictif ou issu de fictions célèbres.</br>
+        Toute ressemblance avec des personnes ou des situations existantes ou ayant existé ne saurait être que fortuite.</p>
     </div>
   </main>
 

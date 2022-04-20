@@ -102,7 +102,8 @@ h2 {
 
 .titles-wrapper,
 .table-wrapper,
-.pagination-menu {
+.pagination-menu,
+.disclaimer {
   width: 80%;
   margin-top: 20px;
   border-radius: 10px;
@@ -340,4 +341,18 @@ input {
 .invisible-link {
   color: #212529;
   text-decoration: none;
+}
+
+.disclaimer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 130px;
+}
+
+.disclaimer > p {
+  margin: 0;
+  font-size: 0.8rem;
 }
