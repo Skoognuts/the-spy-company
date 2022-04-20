@@ -1,6 +1,9 @@
 # THE SPY COMPANY
 Evaluation Back-End : Créer une Application Web
 
+-> Le script de création de la base de données en SQL ainsi que le diagramme de classe UML sont dans le
+dossier "__LIVRABLES__".
+
 ## Contexte du projet : la BDD
 - Les agents ont un nom, un prénom, une date de naissance, un code d'identification, une nationalité, 1
 ou plusieurs spécialités.
