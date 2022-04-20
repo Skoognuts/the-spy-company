@@ -65,4 +65,45 @@ class MissionRepository extends ServiceEntityRepository
 
         return $query->getOneOrNullResult();
     }
+
+    /* Fonctions de Filtrage */
+    public function getMissionsByTitle()
+    {
+        $queryBuilder = $this->createQueryBuilder('m')
+            ->orderBy('m.title', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getMissionsByCountry()
+    {
+        $queryBuilder = $this->createQueryBuilder('m')
+            ->orderBy('m.country', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getMissionsByStatus()
+    {
+        $queryBuilder = $this->createQueryBuilder('m')
+            ->orderBy('m.status', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getMissionsByType()
+    {
+        $queryBuilder = $this->createQueryBuilder('m')
+            ->orderBy('m.type', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

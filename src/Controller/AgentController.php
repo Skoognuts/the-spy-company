@@ -16,7 +16,20 @@ class AgentController extends AbstractController
     #[Route('/', name: 'app_agent_index', methods: ['GET'])]
     public function index(AgentRepository $agentRepository): Response
     {
-        $agents = $agentRepository->getAgents();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'lastName') {
+                $agents = $agentRepository->getAgentsByLastName();
+            } elseif ($_GET["order"] == 'firstName') {
+                $agents = $agentRepository->getAgentsByFirstName();
+            } elseif ($_GET["order"] == 'dateOfBirth') {
+                $agents = $agentRepository->getAgentsByBirthDate();
+            } elseif ($_GET["order"] == 'nationality') {
+                $agents = $agentRepository->getAgentsByNationality();
+            }
+        } else {
+            $agents = $agentRepository->getAgents();
+        }
+
         $agentsLength = count($agents);
         if ($agentsLength > 10) {
             $agents = array_slice($agents, 0, 10);
@@ -38,7 +51,20 @@ class AgentController extends AbstractController
     #[Route('/page-{page}', name: 'app_agent_index_page')]
     public function agentsList(AgentRepository $agentRepository, int $page): Response
     {
-        $agents = $agentRepository->getAgents();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'lastName') {
+                $agents = $agentRepository->getAgentsByLastName();
+            } elseif ($_GET["order"] == 'firstName') {
+                $agents = $agentRepository->getAgentsByFirstName();
+            } elseif ($_GET["order"] == 'dateOfBirth') {
+                $agents = $agentRepository->getAgentsByBirthDate();
+            } elseif ($_GET["order"] == 'nationality') {
+                $agents = $agentRepository->getAgentsByNationality();
+            }
+        } else {
+            $agents = $agentRepository->getAgents();
+        }
+
         $agentsLength = count($agents);
         $pageCount = substr($agentsLength, 0, -1);
         if (substr($agentsLength, -1) == 0) {

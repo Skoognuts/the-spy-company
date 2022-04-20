@@ -16,7 +16,14 @@ class SpecialtyController extends AbstractController
     #[Route('/', name: 'app_specialty_index', methods: ['GET'])]
     public function index(SpecialtyRepository $specialtyRepository): Response
     {
-        $specialties = $specialtyRepository->getSpecialties();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'title') {
+                $specialties = $specialtyRepository->getSpecialtiesByTitle();
+            }
+        } else {
+            $specialties = $specialtyRepository->getSpecialties();
+        }
+        
         $specialtiesLength = count($specialties);
         if ($specialtiesLength > 10) {
             $specialties = array_slice($specialties, 0, 10);
@@ -37,7 +44,14 @@ class SpecialtyController extends AbstractController
     #[Route('/page-{page}', name: 'app_specialty_index_page')]
     public function specialtiesList(SpecialtyRepository $specialtyRepository, int $page): Response
     {
-        $specialties = $specialtyRepository->getSpecialties();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'title') {
+                $specialties = $specialtyRepository->getSpecialtiesByTitle();
+            }
+        } else {
+            $specialties = $specialtyRepository->getSpecialties();
+        }
+        
         $specialtiesLength = count($specialties);
         $pageCount = substr($specialtiesLength, 0, -1);
         if (substr($specialtiesLength, -1) == 0) {

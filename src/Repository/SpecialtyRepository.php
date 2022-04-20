@@ -54,4 +54,15 @@ class SpecialtyRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    /* Fonctions de Filtrage */
+    public function getSpecialtiesByTitle()
+    {
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->orderBy('s.title', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

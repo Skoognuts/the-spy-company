@@ -54,4 +54,45 @@ class HideoutRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    /* Fonctions de Filtrage */
+    public function getHideoutsByCode()
+    {
+        $queryBuilder = $this->createQueryBuilder('h')
+            ->orderBy('h.code', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getHideoutsByAddress()
+    {
+        $queryBuilder = $this->createQueryBuilder('h')
+            ->orderBy('h.address', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getHideoutsByCountry()
+    {
+        $queryBuilder = $this->createQueryBuilder('h')
+            ->orderBy('h.country', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getHideoutsByType()
+    {
+        $queryBuilder = $this->createQueryBuilder('h')
+            ->orderBy('h.type', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

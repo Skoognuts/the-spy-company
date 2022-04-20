@@ -1,7 +1,9 @@
 <header>
   <div class="header-content">
     <div>
-      <img class="logo" src="{{ asset('images/logo_brand.png') }}" alt="Logo">
+      <a href="{{ path('homepage') }}">
+        <img class="logo" src="{{ asset('images/logo_brand.png') }}" alt="Logo">
+      </a>
     </div>
     <div class="login_wrapper">
       {% if app.user %}

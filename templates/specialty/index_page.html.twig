@@ -30,44 +30,51 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Intitulé</th>
+                        <th><a class="invisible-link" href="{{ path('app_specialty_index') }}">Id{% if app.request.get('order') == null %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_specialty_index', {'order': 'title'}) }}">Intitulé{% if app.request.get('order') == "title" %} 🡇{% endif %}</a></th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for specialty in specialties %}
-                    <tr>
-                        <td>{{ specialty.id }}</td>
-                        <td>{{ specialty.title }}</td>
-                        <td class="text-center">
-                            <a href="{{ path('app_specialty_show', {'id': specialty.id}) }}">Voir</a>
-                            <a href="{{ path('app_specialty_edit', {'id': specialty.id}) }}">Modifier</a>
-                        </td>
-                    </tr>
+                {% if specialties is not empty %}
+                    {% for specialty in specialties %}
+                        <tr>
+                            <td>{{ specialty.id }}</td>
+                            <td>{{ specialty.title }}</td>
+                            <td class="text-center">
+                                <a href="{{ path('app_specialty_show', {'id': specialty.id}) }}">Voir</a>
+                                <a href="{{ path('app_specialty_edit', {'id': specialty.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% else %}
                     <tr>
                         <td colspan="3">Aucune spécialté en base de données</td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
+        {% set order = app.request.get('order') %}
         <div class="pagination-menu mb-2">
-            <a href="{{ path('app_specialty_index_page', {'page': (page - 1)}) }}">Page précédente</a>
+            {% if page == 2 %}
+                <a href="{{ path('app_specialty_index', {'order': order}) }}">Page précédente</a>
+            {% else %}
+                <a href="{{ path('app_specialty_index_page', {'page': (page - 1), 'order': order}) }}">Page précédente</a>
+            {% endif %}
             <p>&emsp;|&emsp;</p>
             {% for i in range(1, pageCount) %}
                 {% if i == page %}
                     <p class="inactive-link">{{ i }}</p>
                 {% else %}
-                    <a href="{{ path('app_specialty_index_page', {'page': i}) }}">{{ i }}</a>
+                    <a href="{{ path('app_specialty_index_page', {'page': i, 'order': order}) }}">{{ i }}</a>
                 {% endif %}
                 <p>&emsp;|&emsp;</p>
             {% endfor %}
             {% if page >= pageCount %}
                 <p class="inactive-link">Page suivante</p>
             {% else %}
-                <a href="{{ path('app_specialty_index_page', {'page': (page + 1)}) }}">Page suivante</a>
+                <a href="{{ path('app_specialty_index_page', {'page': (page + 1), 'order': order}) }}">Page suivante</a>
             {% endif %}
         </div>
         <div class="pagination-menu mt-0">

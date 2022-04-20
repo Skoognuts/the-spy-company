@@ -54,4 +54,55 @@ class ContactRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    /* Fonctions de Filtrage */
+    public function getContactsByLastName()
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->orderBy('c.lastName', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getContactsByFirstName()
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->orderBy('c.firstName', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getContactsByBirthDate()
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->orderBy('c.dateOfBirth', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getContactsByCodeName()
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->orderBy('c.codeName', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getContactsByNationality()
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->orderBy('c.nationality', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

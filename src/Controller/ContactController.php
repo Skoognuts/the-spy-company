@@ -16,7 +16,22 @@ class ContactController extends AbstractController
     #[Route('/', name: 'app_contact_index', methods: ['GET'])]
     public function index(ContactRepository $contactRepository): Response
     {
-        $contacts = $contactRepository->getContacts();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'lastName') {
+                $contacts = $contactRepository->getContactsByLastName();
+            } elseif ($_GET["order"] == 'firstName') {
+                $contacts = $contactRepository->getContactsByFirstName();
+            } elseif ($_GET["order"] == 'dateOfBirth') {
+                $contacts = $contactRepository->getContactsByBirthDate();
+            } elseif ($_GET["order"] == 'codeName') {
+                $contacts = $contactRepository->getContactsByCodeName();
+            } elseif ($_GET["order"] == 'nationality') {
+                $contacts = $contactRepository->getContactsByNationality();
+            }
+        } else {
+            $contacts = $contactRepository->getContacts();
+        }
+        
         $contactsLength = count($contacts);
         if ($contactsLength > 10) {
             $contacts = array_slice($contacts, 0, 10);
@@ -37,7 +52,22 @@ class ContactController extends AbstractController
     #[Route('/page-{page}', name: 'app_contact_index_page')]
     public function contactsList(ContactRepository $contactRepository, int $page): Response
     {
-        $contacts = $contactRepository->getContacts();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'lastName') {
+                $contacts = $contactRepository->getContactsByLastName();
+            } elseif ($_GET["order"] == 'firstName') {
+                $contacts = $contactRepository->getContactsByFirstName();
+            } elseif ($_GET["order"] == 'dateOfBirth') {
+                $contacts = $contactRepository->getContactsByBirthDate();
+            } elseif ($_GET["order"] == 'codeName') {
+                $contacts = $contactRepository->getContactsByCodeName();
+            } elseif ($_GET["order"] == 'nationality') {
+                $contacts = $contactRepository->getContactsByNationality();
+            }
+        } else {
+            $contacts = $contactRepository->getContacts();
+        }
+
         $contactsLength = count($contacts);
         $pageCount = substr($contactsLength, 0, -1);
         if (substr($contactsLength, -1) == 0) {

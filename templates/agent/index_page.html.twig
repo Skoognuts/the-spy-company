@@ -30,52 +30,59 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th class="text-center">Date de naissance</th>
-                        <th class="text-center">Code d'identifiaction</th>
-                        <th>Nationalité</th>
+                        <th><a class="invisible-link" href="{{ path('app_agent_index') }}">Id{% if app.request.get('order') == null %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_agent_index', {'order': 'lastName'}) }}">Nom{% if app.request.get('order') == "lastName" %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_agent_index', {'order': 'firstName'}) }}">Prénom{% if app.request.get('order') == "firstName" %} 🡇{% endif %}</a></th>
+                        <th class="text-center"><a class="invisible-link" href="{{ path('app_agent_index', {'order': 'dateOfBirth'}) }}">Date de naissance{% if app.request.get('order') == "dateOfBirth" %} 🡇{% endif %}</a></th>
+                        <th class="text-center"><a class="invisible-link" href="{{ path('app_agent_index') }}">Code d'identifiaction{% if app.request.get('order') == null %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_agent_index', {'order': 'nationality'}) }}">Nationalité{% if app.request.get('order') == "nationality" %} 🡇{% endif %}</a></th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for agent in agents %}
-                    <tr>
-                        <td>{{ agent.id }}</td>
-                        <td>{{ agent.lastName }}</td>
-                        <td>{{ agent.firstName }}</td>
-                        <td class="text-center">{{ agent.dateOfBirth | date('d/m/Y') }}</td>
-                        <td class="text-center">{{ agent.identificationCode }}</td>
-                        <td>{{ agent.nationality }}</td>
-                        <td class="text-center">
-                            <a href="{{ path('app_agent_show', {'id': agent.id}) }}">Voir</a>
-                            <a href="{{ path('app_agent_edit', {'id': agent.id}) }}">Modifier</a>
-                        </td>
-                    </tr>
+                {% if agents is not empty %}
+                    {% for agent in agents %}
+                        <tr>
+                            <td>{{ agent.id }}</td>
+                            <td>{{ agent.lastName }}</td>
+                            <td>{{ agent.firstName }}</td>
+                            <td class="text-center">{{ agent.dateOfBirth | date('d/m/Y') }}</td>
+                            <td class="text-center">{{ agent.identificationCode }}</td>
+                            <td>{{ agent.nationality }}</td>
+                            <td class="text-center">
+                                <a href="{{ path('app_agent_show', {'id': agent.id}) }}">Voir</a>
+                                <a href="{{ path('app_agent_edit', {'id': agent.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% else %}
                     <tr>
                         <td colspan="7">Aucun agent en base de données</td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
+        {% set order = app.request.get('order') %}
         <div class="pagination-menu mb-2">
-            <a href="{{ path('app_agent_index_page', {'page': (page - 1)}) }}">Page précédente</a>
+            {% if page == 2 %}
+                <a href="{{ path('app_agent_index', {'order': order}) }}">Page précédente</a>
+            {% else %}
+                <a href="{{ path('app_agent_index_page', {'page': (page - 1), 'order': order}) }}">Page précédente</a>
+            {% endif %}
             <p>&emsp;|&emsp;</p>
             {% for i in range(1, pageCount) %}
                 {% if i == page %}
                     <p class="inactive-link">{{ i }}</p>
                 {% else %}
-                    <a href="{{ path('app_agent_index_page', {'page': i}) }}">{{ i }}</a>
+                    <a href="{{ path('app_agent_index_page', {'page': i, 'order': order}) }}">{{ i }}</a>
                 {% endif %}
                 <p>&emsp;|&emsp;</p>
             {% endfor %}
             {% if page >= pageCount %}
                 <p class="inactive-link">Page suivante</p>
             {% else %}
-                <a href="{{ path('app_agent_index_page', {'page': (page + 1)}) }}">Page suivante</a>
+                <a href="{{ path('app_agent_index_page', {'page': (page + 1), 'order': order}) }}">Page suivante</a>
             {% endif %}
         </div>
         <div class="pagination-menu mt-0">

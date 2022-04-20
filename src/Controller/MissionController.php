@@ -16,7 +16,20 @@ class MissionController extends AbstractController
     #[Route('/', name: 'app_mission_index', methods: ['GET'])]
     public function index(MissionRepository $missionRepository): Response
     {
-        $missions = $missionRepository->getMissions();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'title') {
+                $missions = $missionRepository->getMissionsByTitle();
+            } elseif ($_GET["order"] == 'country') {
+                $missions = $missionRepository->getMissionsByCountry();
+            } elseif ($_GET["order"] == 'status') {
+                $missions = $missionRepository->getMissionsByStatus();
+            } elseif ($_GET["order"] == 'type') {
+                $missions = $missionRepository->getMissionsByType();
+            } 
+        } else {
+            $missions = $missionRepository->getMissions();
+        }
+        
         $missionsLength = count($missions);
         if ($missionsLength > 10) {
             $missions = array_slice($missions, 0, 10);
@@ -37,7 +50,20 @@ class MissionController extends AbstractController
     #[Route('/page-{page}', name: 'app_mission_index_page')]
     public function missionsList(MissionRepository $missionRepository, int $page): Response
     {
-        $missions = $missionRepository->getMissions();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'title') {
+                $missions = $missionRepository->getMissionsByTitle();
+            } elseif ($_GET["order"] == 'country') {
+                $missions = $missionRepository->getMissionsByCountry();
+            } elseif ($_GET["order"] == 'status') {
+                $missions = $missionRepository->getMissionsByStatus();
+            } elseif ($_GET["order"] == 'type') {
+                $missions = $missionRepository->getMissionsByType();
+            } 
+        } else {
+            $missions = $missionRepository->getMissions();
+        }
+        
         $missionsLength = count($missions);
         $pageCount = substr($missionsLength, 0, -1);
         if (substr($missionsLength, -1) == 0) {

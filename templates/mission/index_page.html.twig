@@ -30,52 +30,59 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Intitulé</th>
-                        <th class="text-center">Nom de code</th>
-                        <th>Pays</th>
-                        <th>Statut</th>
-                        <th>Type</th>
+                        <th><a class="invisible-link" href="{{ path('app_mission_index') }}">Id{% if app.request.get('order') == null %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_mission_index', {'order': 'title'}) }}">Intitulé{% if app.request.get('order') == "title" %} 🡇{% endif %}</a></th>
+                        <th class="text-center"><a class="invisible-link" href="{{ path('app_mission_index') }}">Nom de code{% if app.request.get('order') == null %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_mission_index', {'order': 'country'}) }}">Pays{% if app.request.get('order') == "country" %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_mission_index', {'order': 'status'}) }}">Statut{% if app.request.get('order') == "status" %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_mission_index', {'order': 'type'}) }}">Type{% if app.request.get('order') == "type" %} 🡇{% endif %}</a></th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for mission in missions %}
-                    <tr>
-                        <td>{{ mission.id }}</td>
-                        <td>{{ mission.title }}</td>
-                        <td class="text-center">{{ mission.codeName }}</td>
-                        <td>{{ mission.country }}</td>
-                        <td>{{ mission.status }}</td>
-                        <td>{{ mission.type }}</td>
-                        <td class="text-center">
-                            <a href="{{ path('missionId', {'id': mission.id}) }}">Voir</a>
-                            <a href="{{ path('app_mission_edit', {'id': mission.id}) }}">Modifier</a>
-                        </td>
-                    </tr>
+                {% if missions is not empty %}
+                    {% for mission in missions %}
+                        <tr>
+                            <td>{{ mission.id }}</td>
+                            <td>{{ mission.title }}</td>
+                            <td class="text-center">{{ mission.codeName }}</td>
+                            <td>{{ mission.country }}</td>
+                            <td>{{ mission.status }}</td>
+                            <td>{{ mission.type }}</td>
+                            <td class="text-center">
+                                <a href="{{ path('missionId', {'id': mission.id}) }}">Voir</a>
+                                <a href="{{ path('app_mission_edit', {'id': mission.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% else %}
                     <tr>
                         <td colspan="7">Aucune mission en base de données</td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
+        {% set order = app.request.get('order') %}
         <div class="pagination-menu mb-2">
-            <a href="{{ path('app_mission_index_page', {'page': (page - 1)}) }}">Page précédente</a>
+            {% if page == 2 %}
+                <a href="{{ path('app_mission_index', {'order': order}) }}">Page précédente</a>
+            {% else %}
+                <a href="{{ path('app_mission_index_page', {'page': (page - 1), 'order': order}) }}">Page précédente</a>
+            {% endif %}
             <p>&emsp;|&emsp;</p>
             {% for i in range(1, pageCount) %}
                 {% if i == page %}
                     <p class="inactive-link">{{ i }}</p>
                 {% else %}
-                    <a href="{{ path('app_mission_index_page', {'page': i}) }}">{{ i }}</a>
+                    <a href="{{ path('app_mission_index_page', {'page': i, 'order': order}) }}">{{ i }}</a>
                 {% endif %}
                 <p>&emsp;|&emsp;</p>
             {% endfor %}
             {% if page >= pageCount %}
                 <p class="inactive-link">Page suivante</p>
             {% else %}
-                <a href="{{ path('app_mission_index_page', {'page': (page + 1)}) }}">Page suivante</a>
+                <a href="{{ path('app_mission_index_page', {'page': (page + 1), 'order': order}) }}">Page suivante</a>
             {% endif %}
         </div>
         <div class="pagination-menu mt-0">

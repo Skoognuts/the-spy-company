@@ -54,4 +54,55 @@ class TargetRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    /* Fonctions de Filtrage */
+    public function getTargetsByLastName()
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->orderBy('t.lastName', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getTargetsByFirstName()
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->orderBy('t.firstName', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getTargetsByBirthDate()
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->orderBy('t.dateOfBirth', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getTargetsByCodeName()
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->orderBy('t.codeName', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getTargetsByNationality()
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+            ->orderBy('t.nationality', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

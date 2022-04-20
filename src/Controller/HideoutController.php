@@ -16,7 +16,20 @@ class HideoutController extends AbstractController
     #[Route('/', name: 'app_hideout_index', methods: ['GET'])]
     public function index(HideoutRepository $hideoutRepository): Response
     {
-        $hideouts = $hideoutRepository->getHideouts();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'code') {
+                $hideouts = $hideoutRepository->getHideoutsByCode();
+            } elseif ($_GET["order"] == 'address') {
+                $hideouts = $hideoutRepository->getHideoutsByAddress();
+            } elseif ($_GET["order"] == 'country') {
+                $hideouts = $hideoutRepository->getHideoutsByCountry();
+            } elseif ($_GET["order"] == 'type') {
+                $hideouts = $hideoutRepository->getHideoutsByType();
+            }
+        } else {
+            $hideouts = $hideoutRepository->getHideouts();
+        }
+        
         $hideoutsLength = count($hideouts);
         if ($hideoutsLength > 10) {
             $hideouts = array_slice($hideouts, 0, 10);
@@ -37,7 +50,20 @@ class HideoutController extends AbstractController
     #[Route('/page-{page}', name: 'app_hideout_index_page')]
     public function hideoutsList(HideoutRepository $hideoutRepository, int $page): Response
     {
-        $hideouts = $hideoutRepository->getHideouts();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'code') {
+                $hideouts = $hideoutRepository->getHideoutsByCode();
+            } elseif ($_GET["order"] == 'address') {
+                $hideouts = $hideoutRepository->getHideoutsByAddress();
+            } elseif ($_GET["order"] == 'country') {
+                $hideouts = $hideoutRepository->getHideoutsByCountry();
+            } elseif ($_GET["order"] == 'type') {
+                $hideouts = $hideoutRepository->getHideoutsByType();
+            }
+        } else {
+            $hideouts = $hideoutRepository->getHideouts();
+        }
+
         $hideoutsLength = count($hideouts);
         $pageCount = substr($hideoutsLength, 0, -1);
         if (substr($hideoutsLength, -1) == 0) {

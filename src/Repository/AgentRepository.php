@@ -56,36 +56,40 @@ class AgentRepository extends ServiceEntityRepository
     }
 
     /* Fonctions de Filtrage */
-    public function getAgentsByIdCode(int $idCode)
+    public function getAgentsByLastName()
     {
         $queryBuilder = $this->createQueryBuilder('a')
-            ->where('a.identificationCode = :idCode')
-            ->setParameter('idCode', $idCode)
-            ->orderBy('a.identificationCode')
+            ->orderBy('a.lastName', 'asc')
         ;
         $query = $queryBuilder->getQuery();
 
         return $query->getResult();
     }
 
-    public function getAgentsByNationality(string $nationality)
+    public function getAgentsByFirstName()
     {
         $queryBuilder = $this->createQueryBuilder('a')
-            ->where('a.nationality = :nationality')
-            ->setParameter('nationality', $nationality)
-            ->orderBy('a.id')
+            ->orderBy('a.firstName', 'asc')
         ;
         $query = $queryBuilder->getQuery();
 
         return $query->getResult();
     }
 
-    public function getAgentsBySpecialty(int $specialtyId)
+    public function getAgentsByBirthDate()
     {
         $queryBuilder = $this->createQueryBuilder('a')
-            ->where(':specialtyId MEMBER OF a.specialties')
-            ->setParameter('specialtyId', $specialtyId)
-            ->orderBy('a.id')
+            ->orderBy('a.dateOfBirth', 'asc')
+        ;
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getAgentsByNationality()
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->orderBy('a.nationality', 'asc')
         ;
         $query = $queryBuilder->getQuery();
 

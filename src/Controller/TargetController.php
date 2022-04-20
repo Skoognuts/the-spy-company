@@ -16,7 +16,22 @@ class TargetController extends AbstractController
     #[Route('/', name: 'app_target_index', methods: ['GET'])]
     public function index(TargetRepository $targetRepository): Response
     {
-        $targets = $targetRepository->getTargets();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'lastName') {
+                $targets = $targetRepository->getTargetsByLastName();
+            } elseif ($_GET["order"] == 'firstName') {
+                $targets = $targetRepository->getTargetsByFirstName();
+            } elseif ($_GET["order"] == 'dateOfBirth') {
+                $targets = $targetRepository->getTargetsByBirthDate();
+            } elseif ($_GET["order"] == 'codeName') {
+                $targets = $targetRepository->getTargetsByCodeName();
+            } elseif ($_GET["order"] == 'nationality') {
+                $targets = $targetRepository->getTargetsByNationality();
+            }
+        } else {
+            $targets = $targetRepository->getTargets();
+        }
+
         $targetsLength = count($targets);
         if ($targetsLength > 10) {
             $targets = array_slice($targets, 0, 10);
@@ -37,7 +52,22 @@ class TargetController extends AbstractController
     #[Route('/page-{page}', name: 'app_target_index_page')]
     public function targetsList(TargetRepository $targetRepository, int $page): Response
     {
-        $targets = $targetRepository->getTargets();
+        if (isset($_GET["order"])) {
+            if ($_GET["order"] == 'lastName') {
+                $targets = $targetRepository->getTargetsByLastName();
+            } elseif ($_GET["order"] == 'firstName') {
+                $targets = $targetRepository->getTargetsByFirstName();
+            } elseif ($_GET["order"] == 'dateOfBirth') {
+                $targets = $targetRepository->getTargetsByBirthDate();
+            } elseif ($_GET["order"] == 'codeName') {
+                $targets = $targetRepository->getTargetsByCodeName();
+            } elseif ($_GET["order"] == 'nationality') {
+                $targets = $targetRepository->getTargetsByNationality();
+            }
+        } else {
+            $targets = $targetRepository->getTargets();
+        }
+        
         $targetsLength = count($targets);
         $pageCount = substr($targetsLength, 0, -1);
         if (substr($targetsLength, -1) == 0) {

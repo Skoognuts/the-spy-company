@@ -30,37 +30,40 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th class="text-center">Date de naissance</th>
-                        <th class="text-center">Nom de code</th>
-                        <th>Nationalité</th>
+                        <th><a class="invisible-link" href="{{ path('app_target_index') }}">Id{% if app.request.get('order') == null %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_target_index', {'order': 'lastName'}) }}">Nom{% if app.request.get('order') == "lastName" %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_target_index', {'order': 'firstName'}) }}">Prénom{% if app.request.get('order') == "firstName" %} 🡇{% endif %}</a></th>
+                        <th class="text-center"><a class="invisible-link" href="{{ path('app_target_index', {'order': 'dateOfBirth'}) }}">Date de naissance{% if app.request.get('order') == "dateOfBirth" %} 🡇{% endif %}</a></th>
+                        <th class="text-center"><a class="invisible-link" href="{{ path('app_target_index', {'order': 'codeName'}) }}">Nom de code{% if app.request.get('order') == "codeName" %} 🡇{% endif %}</a></th>
+                        <th><a class="invisible-link" href="{{ path('app_target_index', {'order': 'nationality'}) }}">Nationalité{% if app.request.get('order') == "nationality" %} 🡇{% endif %}</a></th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for target in targets %}
-                    <tr>
-                        <td>{{ target.id }}</td>
-                        <td>{{ target.lastName }}</td>
-                        <td>{{ target.firstName }}</td>
-                        <td class="text-center">{{ target.dateOfBirth | date('d/m/Y') }}</td>
-                        <td class="text-center">{{ target.codeName }}</td>
-                        <td>{{ target.nationality }}</td>
-                        <td class="text-center">
-                            <a href="{{ path('app_target_show', {'id': target.id}) }}">Voir</a>
-                            <a href="{{ path('app_target_edit', {'id': target.id}) }}">Modifier</a>
-                        </td>
-                    </tr>
+                {% if targets is not empty %}
+                    {% for target in targets %}
+                        <tr>
+                            <td>{{ target.id }}</td>
+                            <td>{{ target.lastName }}</td>
+                            <td>{{ target.firstName }}</td>
+                            <td class="text-center">{{ target.dateOfBirth | date('d/m/Y') }}</td>
+                            <td class="text-center">{{ target.codeName }}</td>
+                            <td>{{ target.nationality }}</td>
+                            <td class="text-center">
+                                <a href="{{ path('app_target_show', {'id': target.id}) }}">Voir</a>
+                                <a href="{{ path('app_target_edit', {'id': target.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% else %}
                     <tr>
                         <td colspan="7">Aucune cible en base de données</td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>
+        {% set order = app.request.get('order') %}
         <div class="pagination-menu mb-2">
             <p class="inactive-link">Page précédente</p>
             <p>&emsp;|&emsp;</p>
@@ -68,12 +71,12 @@
                 {% if i == 1 %}
                     <p class="inactive-link">{{ i }}</p>
                 {% else %}
-                    <a href="{{ path('app_target_index_page', {'page': i}) }}">{{ i }}</a>
+                    <a href="{{ path('app_target_index_page', {'page': i, 'order': order}) }}">{{ i }}</a>
                 {% endif %}
                 <p>&emsp;|&emsp;</p>
             {% endfor %}
             {% if targetsLength > 10 %}
-                <a href="{{ path('app_target_index_page', {'page': 2}) }}">Page suivante</a>
+                <a href="{{ path('app_target_index_page', {'page': 2, 'order': order}) }}">Page suivante</a>
             {% else %}
                 <p class="inactive-link">Page suivante</p>
             {% endif %}
